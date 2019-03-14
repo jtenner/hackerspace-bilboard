@@ -48,7 +48,7 @@ class App extends React.Component<{}, AppState> {
     const current = this.state.data[currentIndex];
     const previousIndex = currentIndex === 0 ? this.state.data.length - 1 : currentIndex - 1;
     const previous = this.state.data[previousIndex];
-    return <div class="deck">
+    return <div className="deck">
       <Slide key={previousIndex} record={previous} fadeIn={false}/>
       <Slide key={currentIndex} record={current} fadeIn />
     </div>
