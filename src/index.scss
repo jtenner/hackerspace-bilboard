@@ -1,11 +1,28 @@
-.slide {
-  transition: opacity 2s ease-in;
+$color: rgb(92, 92, 184);
+body {
+  background: $color;
+}
 
-  &.slide-fadein {
-    opacity: 100%;
-  }
+* { padding: 0; margin: 0; }
+.deck {
+  position: relative;
 
-  &.slide-fadeout {
-    opacity: 0%;
+  .slide {
+    transition: opacity 2s ease-in;
+    position: absolute;
+    opacity: 0;
+    background: $color;
+    color: white;
+    width: 100vw;
+    height: 100vh;
+
+    &.slide-fadein {
+      opacity: 1;
+      z-index: 0;
+    }
+    &.slide-fadeout {
+      opacity: 0;
+      z-index: 1;
+    }
   }
 }

@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { EventItem } from "./EventItem";
 import { AppState } from "./AppState";
 import moment from "moment";
+import fetchJSONP from "fetch-jsonp";
 
 const eventUrl = "http://api.meetup.com/CT-Hackerspace/events?no_later_than=";
 
@@ -47,7 +48,7 @@ class App extends React.Component<{}, AppState> {
     const current = this.state.data[currentIndex];
     const previousIndex = currentIndex === 0 ? this.state.data.length - 1 : currentIndex - 1;
     const previous = this.state.data[previousIndex];
-    return <div>
+    return <div class="deck">
       <Slide key={previousIndex} record={previous} fadeIn={false}/>
       <Slide key={currentIndex} record={current} fadeIn />
     </div>
@@ -56,23 +57,13 @@ class App extends React.Component<{}, AppState> {
     const url = eventUrl + encodeURIComponent(moment().add(2, "months").format("YYYY-MM-DDThh:mm:ss"))
 
     console.log(url);
-    const resp = await fetch(
-      url,
-      {
-        mode: "no-cors",
-      },
-    );
-    const text = await resp.text();
-    const replaced = text.replace(
-      /src="([^"]*)"/g,
-      "src=\\\"$1\\\"",
-    );
-    console.log(replaced);
-    const json: EventItem[] = JSON.parse(replaced);
-
+    const resp = await fetchJSONP(url);
+    const json: any = await resp.json();
+    const today = moment();
     this.setState({
-      data: json
-        .filter(e => e.visibility === "public"),
+      data: json.data
+        .filter(e => e.visibility === "public")
+        .filter(e => moment(e.local_date).isAfter(today)),
       index: 0,
     });
   }
