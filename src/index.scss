@@ -1,6 +1,11 @@
-$color: rgb(92, 92, 184);
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+$color: rgb(253, 249, 229);
+$padding: 10px;
+
 body {
   background: $color;
+  padding: $padding;
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
 }
 
 * { padding: 0; margin: 0; }
@@ -12,7 +17,7 @@ body {
     position: absolute;
     opacity: 0;
     background: $color;
-    color: white;
+    color: #333;
     width: 100vw;
     height: 100vh;
 
@@ -23,6 +28,32 @@ body {
     &.slide-fadeout {
       opacity: 0;
       z-index: 1;
+    }
+    .slide-title {
+      margin: 0 auto $padding;
+      text-align: center;
+      font-size: 36px;
+      width: 75vw;
+    }
+    .slide-date {
+      margin: 0 auto $padding;
+      width: 75vw;
+      color: #666;
+      font-size: 24px;
+      text-align:center;
+    }
+    .slide-contents {
+      width: 75vw;
+      margin: 0 auto;
+
+      p {
+        margin-bottom: 1em;
+
+        img {
+          display: block;
+          margin: 0 auto;
+        }
+      }
     }
   }
 }

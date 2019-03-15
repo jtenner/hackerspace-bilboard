@@ -19,8 +19,8 @@ interface SlideProps {
 class Slide extends React.Component<SlideProps, SlideState> {
   render() {
     return <div className={this.props.fadeIn ? "slide slide-fadein" : "slide slide-fadeout"}>
-      <h1 className="slide-title">Event: {this.props.record.name}</h1>
-      <div className="slide-date">Time: {this.props.record.local_date} {this.props.record.local_time}</div>
+      <h1 className="slide-title">{this.props.record.name}</h1>
+      <div className="slide-date">{moment(this.props.record.local_date + " " + this.props.record.local_time).format("MMM Do YYYY, h:mm a")}</div>
       <div className="slide-contents" dangerouslySetInnerHTML={{ __html: this.props.record.description }}></div>
     </div>;
   }
