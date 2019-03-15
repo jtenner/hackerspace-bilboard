@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
 $color: rgb(253, 249, 229);
 $padding: 10px;
 
 body {
   background: $color;
-  padding: $padding;
   font-family: 'Open Sans', Arial, Helvetica, sans-serif;
 }
 
@@ -18,8 +18,15 @@ body {
     opacity: 0;
     background: $color;
     color: #333;
-    width: 100vw;
-    height: 100vh;
+    background-color: #fff;
+    width: 75vw;
+    height: 90vh;
+    left: 12.5vw;
+    top: 5vh;
+    box-sizing: border-box;
+    border: 2px solid darken($color,15%);
+    border-radius: $padding;
+    padding: $padding;
 
     &.slide-fadein {
       opacity: 1;
@@ -32,18 +39,16 @@ body {
     .slide-title {
       margin: 0 auto $padding;
       text-align: center;
-      font-size: 36px;
-      width: 75vw;
+      font-size: 40px;
+      font-family: 'Montserrat', Arial, Helvetica, sans-serif;
     }
     .slide-date {
       margin: 0 auto $padding;
-      width: 75vw;
       color: #666;
       font-size: 24px;
       text-align:center;
     }
     .slide-contents {
-      width: 75vw;
       margin: 0 auto;
 
       p {
