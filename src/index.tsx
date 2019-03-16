@@ -6,6 +6,8 @@ import moment from "moment";
 import fetchJSONP from "fetch-jsonp";
 
 const eventUrl = "http://api.meetup.com/CT-Hackerspace/events?no_later_than=";
+const space = " ";
+const friendlyFormat = "MMM Do YYYY, h:mm a";
 
 interface SlideState {
 
@@ -18,9 +20,10 @@ interface SlideProps {
 
 class Slide extends React.Component<SlideProps, SlideState> {
   render() {
+    const eventMoment = moment(this.props.record.local_date + space + this.props.record.local_time);
     return <div className={this.props.fadeIn ? "slide slide-fadein" : "slide slide-fadeout"}>
       <h1 className="slide-title">{this.props.record.name}</h1>
-      <div className="slide-date">{moment(this.props.record.local_date + " " + this.props.record.local_time).format("MMM Do YYYY, h:mm a")}</div>
+      <div className="slide-date">{eventMoment.format(friendlyFormat)}</div>
       <div className="slide-contents" dangerouslySetInnerHTML={{ __html: this.props.record.description }}></div>
     </div>;
   }
@@ -34,8 +37,9 @@ class App extends React.Component<{}, AppState> {
       index: 0,
     };
     setInterval(() => {
+      const nextIndex = (this.state.index === this.state.data.length - 1) ? 0 : this.state.index + 1;
       this.setState({
-        index: (this.state.index === this.state.data.length - 1) ? 0 : this.state.index + 1,
+        index: nextIndex,
       });
     }, 45 * 1000);
   }
@@ -54,12 +58,12 @@ class App extends React.Component<{}, AppState> {
     </div>
   }
   async updateData(): Promise<void> {
-    const url = eventUrl + encodeURIComponent(moment().add(2, "months").format("YYYY-MM-DDThh:mm:ss"))
+    const today = moment();
+    const future = today.clone().add(2, "months");
+    const url = eventUrl + encodeURIComponent(future.format("YYYY-MM-DDThh:mm:ss"));
 
-    console.log(url);
     const resp = await fetchJSONP(url);
     const json: any = await resp.json();
-    const today = moment();
     this.setState({
       data: json.data
         .filter(e => e.visibility === "public")
