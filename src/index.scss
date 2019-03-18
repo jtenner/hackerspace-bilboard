@@ -2,12 +2,18 @@
 $color: rgb(253, 249, 229);
 $padding: 10px;
 
+// starting style for every element
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 body {
   background: $color;
   font-family: 'Open Sans', Arial, Helvetica, sans-serif;
 }
 
-* { padding: 0; margin: 0; }
 .deck {
   position: relative;
 
@@ -22,31 +28,36 @@ body {
     height: 90vh;
     left: 12.5vw;
     top: 5vh;
-    box-sizing: border-box;
-    border: 2px solid darken($color,15%);
+    border: 2px solid darken($color, 15%);
     border-radius: $padding;
     padding: $padding;
 
+    // This slide is always in front
     &.slide-fadein {
       opacity: 1;
       z-index: 0;
     }
+
+    // This slide is always moved to the back
     &.slide-fadeout {
       opacity: 0;
       z-index: 1;
     }
+
     .slide-title {
       margin: 0 auto $padding;
       text-align: center;
       font-size: 40px;
       font-family: 'Montserrat', Arial, Helvetica, sans-serif;
     }
+
     .slide-date {
       margin: 0 auto $padding;
       color: #666;
       font-size: 24px;
-      text-align:center;
+      text-align: center;
     }
+
     .slide-contents {
       margin: 0 auto;
 
