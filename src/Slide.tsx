@@ -1,8 +1,9 @@
-import React from "react";
+import * as React from "react";
 import moment from "moment";
 import { SlideProps } from "./SlideProps";
 
 export const friendlyFormat = "MMM Do YYYY, h:mm a";
+
 export class Slide extends React.Component<SlideProps> {
   constructor(props) {
     super(props);
