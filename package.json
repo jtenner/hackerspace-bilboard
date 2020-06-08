@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "parcel src/index.html --out-dir docs",
-    "rimraf": "rimraf dist",
+    "rimraf": "rimraf docs",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dist": "npm run rimraf && parcel build src/index.html --out-dir dist"
+    "dist": "npm run rimraf && parcel build src/index.html --out-dir docs"
   },
   "author": "",
   "license": "ISC",
