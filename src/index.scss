@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat|Open+Sans');
 $color: rgb(253, 249, 229);
-$padding: 10px;
+$padding: 3vh;
 
 // starting style for every element
 * {
@@ -48,14 +48,14 @@ body {
     .slide-title {
       margin: 0 auto $padding;
       text-align: center;
-      font-size: 40px;
+      font-size: 10vh;
       font-family: 'Montserrat', Arial, Helvetica, sans-serif;
     }
 
     .slide-date {
       margin: 0 auto $padding;
       color: #666;
-      font-size: 36px;
+      font-size: 8vh;
       text-align: center;
     }
 
@@ -63,13 +63,13 @@ body {
       margin: 0 auto;
 
       p {
-        margin-bottom: 1em;
-        font-size: 20px;
+        margin-bottom: 0.5em;
+        font-size: 5vh;
 
         img {
-          transform: scale(1.3, 1.3);
+          height: 30vh;
           display: block;
-          margin: 0 auto;
+          margin: $padding auto;
         }
       }
     }
