@@ -1,3 +1,7 @@
+/**
+ * This interface was created by Joshua Tenner to inform TypeScript what the type of an EventItem
+ * looks like.
+ */
 export interface EventItem {
   created: number;
   duration: number;

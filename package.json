@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "parcel src/index.html --out-dir dist",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dist": "parcel build src/index.html --out-dir dist && npm run gh-pages",
+    "gh-pages": "git subtree push --prefix dist origin gh-pages"
   },
   "author": "",
   "license": "ISC",
