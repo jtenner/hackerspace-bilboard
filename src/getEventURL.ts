@@ -1,6 +1,6 @@
 import moment from "moment";
 
-export const eventURL = "http://api.meetup.com/CT-Hackerspace/events?no_later_than=";
+export const eventURL = "https://api.meetup.com/CT-Hackerspace/events?no_later_than=";
 export const eventURLDateFormat = "YYYY-MM-DDThh:mm:ss";
 
 /**
