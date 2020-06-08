@@ -1,4 +1,9 @@
-import { EventItem } from "./EventItem";
+export interface ISlideRecord {
+  local_date: string;
+  local_time: string;
+  name: string;
+  description: string;
+}
 
 /**
  * This interface contains the information about the props passed to the `Slide` component.
@@ -7,6 +12,6 @@ import { EventItem } from "./EventItem";
  * - The fadeIn property sets the `slide-fadein` class on the div element
  */
 export interface SlideProps {
-  record: EventItem;
+  record: ISlideRecord;
   fadeIn: boolean;
 }

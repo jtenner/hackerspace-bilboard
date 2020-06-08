@@ -4,7 +4,8 @@ import { AppState } from "./AppState";
 import moment from "moment";
 import fetchJSONP from "fetch-jsonp";
 import { Slide } from "./Slide";
-import { getEventURL } from "./getEventURL";
+import { getEventURL, staticSlidesURL } from "./getEventURL";
+import { EventItem } from "./EventItem";
 
 /**
  * This is the root React component that represents the app itself.
@@ -67,7 +68,7 @@ class App extends React.Component<{}, AppState> {
   }
 
   /**
-   * This function sets up a setInterval loop for 
+   * This function sets up a setInterval loop for data refresh.
    */
   async updateData(): Promise<void> {
     try {
@@ -75,15 +76,36 @@ class App extends React.Component<{}, AppState> {
       const today = moment();
 
       // use jsonp with the meetup api
-      const resp = await fetchJSONP(url);
-      const json: any = await resp.json();
+
+      const [
+        meetup,
+        ...staticData
+      ] = await Promise.all([
+        fetchJSONP(url).then(e => e.json()),
+        ...staticSlidesURL.map(
+          e => fetch(e).then(f => f.json())
+        )
+      ]);
+
+      const meetupEvents = meetup.data
+        .filter(e => e.visibility === "public")
+        // todo: verify this is correct
+        .filter(e => moment(e.local_date).isAfter(today));
+
+      const data: EventItem[]  = [];
+      const length = Math.max(meetupEvents.length, ...staticData.map(e => e.length));
+
+      for (let i = 0; i < length; i++) {
+        if (i < meetupEvents.length) data.push(meetupEvents[i]);
+        for (let j = 0; j < staticData.length; j++) {
+          const staticDataElement = staticData[i];
+          if (i < staticDataElement.length) data.push(staticDataElement[i]);
+        }
+      }
 
       this.setState({
         // the goal of this expression is to filter the events that are public and are in the future
-        data: json.data
-          .filter(e => e.visibility === "public")
-          // todo: verify this is correct
-          .filter(e => moment(e.local_date).isAfter(today)),
+        data,
         index: 0,
       });
     } catch (ex) {

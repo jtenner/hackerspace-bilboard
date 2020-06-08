@@ -10,3 +10,5 @@ export function getEventURL(): string {
   const future = moment().add(2, "months");
   return eventURL + encodeURIComponent(future.format(eventURLDateFormat));
 }
+
+export const staticSlidesURL: string[] = [];

@@ -4,13 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "parcel src/index.html --out-dir docs",
+    "start": "parcel src/index.html --out-dir docs --public-url .",
     "rimraf": "rimraf docs",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dist": "npm run rimraf && parcel build src/index.html --out-dir docs --public-url ."
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Joshua Tenner <tenner.joshua@gmail.com>, Eric Bright <reddwarfian@gmail.com>",
+  "license": "MIT",
   "devDependencies": {
     "@types/moment": "^2.13.0",
     "@types/react": "^16.9.35",
